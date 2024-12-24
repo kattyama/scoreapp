@@ -1,3 +1,4 @@
+#ver1.0
 import streamlit as st
 import pandas as pd
 
@@ -86,22 +87,21 @@ if len(all_scores) > 0 and len(all_scores[0]) > 1:
     st.write("### スコア差と損益")
     combined_df = pd.concat([pd.DataFrame(game_data) for game_data in all_game_data], axis=1)
     st.dataframe(combined_df)
-    st.write('---')
 
+    st.write('---')
     # 一人あたりの損益額の表示
     st.write("### 一人あたりの損益額")
     individual_profit_loss_data = []
     for i in range(num_people): # インデックスでループ
         individual_profit_loss_data.append({
             "プレイヤー": player_names[i], # プレイヤー名を表示
-            "損益額合計": all_individual_profit_loss[i]["損益額合計"],
-            "スコア差合計値": all_individual_profit_loss[i]["スコア差合計値"]
+            "損益額合計": all_individual_profit_loss[i]["損益額合計"]/2,
+            "スコア差合計値": all_individual_profit_loss[i]["スコア差合計値"]/2
         })
 
     columns = ["プレイヤー", "損益額合計", "スコア差合計値"]
     individual_profit_loss_df = pd.DataFrame(individual_profit_loss_data, columns=columns)
     st.dataframe(individual_profit_loss_df)
-    st.write('---')
 
     # 各プレイヤーの収支表
     st.write("### 各プレイヤーの収支")
@@ -109,7 +109,9 @@ if len(all_scores) > 0 and len(all_scores[0]) > 1:
         st.write(f"#### {player_names[i]}の収支")
         transactions_df = pd.DataFrame(all_player_transactions[i])
         st.dataframe(transactions_df)
+st.write('---')
 
 else:
     st.write("2人以上のプレイヤーのスコアを入力してください。")
+
 
