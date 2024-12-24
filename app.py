@@ -109,7 +109,7 @@ if len(all_scores) > 0 and len(all_scores[0]) > 1:
         st.write(f"#### {player_names[i]}の収支")
         transactions_df = pd.DataFrame(all_player_transactions[i])
         st.dataframe(transactions_df)
-st.write('---')
+    st.write('---')
 
 else:
     st.write("2人以上のプレイヤーのスコアを入力してください。")
